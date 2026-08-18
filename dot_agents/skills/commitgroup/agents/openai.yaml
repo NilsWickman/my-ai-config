@@ -1,0 +1,7 @@
+interface:
+  display_name: "Commit Group"
+  short_description: "Group git changes into clean commits"
+  default_prompt: "Use $commitgroup to stage unstaged changes in coherent groups and commit them safely."
+
+policy:
+  allow_implicit_invocation: false
