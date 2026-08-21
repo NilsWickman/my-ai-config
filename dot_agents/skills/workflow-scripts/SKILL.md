@@ -1,6 +1,7 @@
 ---
 name: workflow-scripts
 description: Survival rules for Workflow-tool scripts. Use before writing or editing a workflow script (agent(), pipeline(), parallel()), and when a finished run returned null, empty, or partial results.
+disable-model-invocation: true
 ---
 
 # Workflow scripts

@@ -1,6 +1,7 @@
 ---
 name: domain-modeling
 description: Domänkort and domain model discipline. Use when creating or updating DOMAIN.md or CONTEXT.md, preparing a project overview for a stakeholder meeting, re-entering a project after a context switch, defining or challenging domain terms, building a glossary, or visualizing a domain as a card (domänkort), side-by-side spread (uppslag), or mind map (domänkarta).
+user-invocable: false
 ---
 
 # Domain Modeling
