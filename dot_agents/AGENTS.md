@@ -19,8 +19,10 @@ requirements. Best at design work, ambiguous reports, and asks whose premise
 might be wrong.
 
 Opus 5: Smart, fast, experienced engineer understanding instructions and keeps
-to the task. Deepest investigations, but rewrites in its own style rather than
-following app conventions; give it explicit conventions and a clear mandate.
+to the task. Deepest investigations, and first pick for ambiguous
+implementation asks: ships the small correct change with an honest report of
+what it left unfixed. Only on convention-heavy UI work it tends to rewrite in
+its own style; hand it the convention reference file there.
 
 
 # Tool Guidance
