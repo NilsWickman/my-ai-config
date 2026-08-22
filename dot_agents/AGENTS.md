@@ -24,6 +24,16 @@ implementation asks: ships the small correct change with an honest report of
 what it left unfixed. Only on convention-heavy UI work it tends to rewrite in
 its own style; hand it the convention reference file there.
 
+## Model steering
+
+- Fable, when unattended (one-shot, workflow, background): no one will answer.
+  Ship your best default; put open questions in the report instead of stopping.
+- Opus, on UI work: match the existing idiom. Find a similar component yourself,
+  or infer the conventions from the surrounding code and UI.
+- Sol: specs and acceptance docs are read-only; disagreement goes in the report,
+  and a PASS claim needs its evidence shown.
+- Terra: no subagents or workflows, do the work yourself. Extend tests, never
+  edit existing ones.
 
 # Tool Guidance
 
