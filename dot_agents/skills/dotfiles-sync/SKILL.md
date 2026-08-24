@@ -36,9 +36,16 @@ GitHub repo                                  ← shared truth between machines
 
 1. Create `dot_agents/skills/<name>/SKILL.md` (frontmatter: `name`,
    `description`) in the source: `$(chezmoi source-path)`.
-2. `chezmoi apply` materializes it to `~/.agents/skills/<name>/`, instantly
+2. Keep invocation metadata portable:
+   - For an explicit-only skill, keep Claude Code's
+     `disable-model-invocation: true` in `SKILL.md` and add
+     `policy.allow_implicit_invocation: false` in `agents/openai.yaml` for
+     Codex and ChatGPT.
+   - Claude Code's `user-invocable: false` has no Codex equivalent. Preserve
+     it for Claude Code; Codex may still expose the skill for explicit use.
+3. `chezmoi apply` materializes it to `~/.agents/skills/<name>/`, instantly
    visible to all tools via their symlinks.
-3. Commit + push from `chezmoi cd`. Other machines pick it up with
+4. Commit + push from `chezmoi cd`. Other machines pick it up with
    `chezmoi update`.
 
 ## Bootstrap a new machine
