@@ -30,6 +30,15 @@ Aktörer: <vem producerar, vem konsumerar, vem äger>
 - **Läge is dated** so staleness is visible at a glance. It links to the moving parts (wayfinder map, tracker); the card holds only the stable.
 - **Multi-context projects**: one card per bounded context plus a context-map card that only lists the contexts and their relationships. Same schema, more cards — never a longer card.
 
+## Deep dives — `domain/`
+
+When a term needs more than its Språk line, it gets its own file in `domain/` next to the card (e.g. `domain/cutters.md`), linked from the term's line in the card. The card's cap never moves.
+
+- **Created on demand, never up front** — a deep dive without a reader is maintenance debt.
+- **First line is the term's Språk definition verbatim**; then what is true, where the truth lives (code, spec, thread, mail), and open questions.
+- Same index-not-store principle as the card: gist and link instead of copying code or spec. No length cap, but everything earns its place.
+- `CONTEXT.md` stays a glossary; deep dives always live in `domain/`.
+
 ## Zoom levels
 
 Three renderings of the same content, for different questions:

@@ -24,6 +24,7 @@ Most repos have a single context:
 /
 ├── DOMAIN.md            ← domänkort (the capped card)
 ├── CONTEXT.md           ← full glossary, only once Språk overflows
+├── domain/              ← per-term deep dives, created on demand (see DOMANKORT-FORMAT.md)
 ├── docs/
 │   └── adr/
 │       ├── 0001-event-sourced-orders.md
