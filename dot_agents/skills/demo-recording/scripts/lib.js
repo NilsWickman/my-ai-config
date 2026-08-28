@@ -118,6 +118,9 @@ function cursorInitScript({ size, halo, accent }) {
     document.body.appendChild(cur);
   };
   document.addEventListener('mousemove', (e) => {
+    // Page loads fire a synthetic move at (0,0); a scripted move never lands
+    // there, so ignoring it keeps the pointer off camera until it really moves.
+    if (e.clientX === 0 && e.clientY === 0) return;
     ensure();
     const cur = document.getElementById('demo-cursor');
     if (cur) { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px'; }
