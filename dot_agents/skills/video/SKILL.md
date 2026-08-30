@@ -1,5 +1,5 @@
 ---
-name: demo-recording
+name: video
 description: Record self-narrating product walkthrough videos of web apps with Playwright, including before/after A/B comparisons of two versions joined by a sweeping divider. Use when the user asks to record a demo, walkthrough, or feature showcase video of a web UI, wants a before-and-after or old-vs-new comparison video, or wants video evidence of a workflow for feedback or documentation.
 disable-model-invocation: true
 ---

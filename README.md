@@ -62,7 +62,7 @@ skip chezmoi entirely.
 | `agent-browser` | Browser automation CLI for agents: navigate, fill forms, screenshot, scrape, test web apps |
 | `commitgroup` | Stage and commit changes in coherent, reviewable groups |
 | `demo-images` | Low-fidelity prototypes: show a few distinct visual alternatives |
-| `demo-recording` | Self-narrating product walkthrough videos of web apps with Playwright, incl. before/after A/B |
+| `video` | Self-narrating product walkthrough videos of web apps with Playwright, incl. before/after A/B |
 | `diagnosing-bugs` | Diagnosis loop for hard bugs and performance regressions |
 | `domain-modeling` | Domain model discipline: DOMAIN.md, CONTEXT.md, glossaries, domain cards |
 | `dotfiles-sync` | Sync this repo between machines, add canonical skills, resolve drift |
