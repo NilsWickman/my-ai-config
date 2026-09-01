@@ -74,7 +74,19 @@ if [ -r /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
   fi
 fi
 
-# 5. Daemon state — flags like --executable-path/--args only apply at daemon START
+# 5. Runtime socket permissions
+RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+if [ -d "$RUNTIME_DIR" ] && [ -w "$RUNTIME_DIR" ]; then
+  ok "runtime directory is writable: $RUNTIME_DIR"
+else
+  warn "runtime directory is not writable: $RUNTIME_DIR. Set XDG_RUNTIME_DIR to a writable directory before starting agent-browser"
+fi
+
+if [ -n "${CODEX_PERMISSION_PROFILE:-}" ] && [ -z "${CODEX_NETWORK_ALLOW_LOCAL_BINDING:-}" ]; then
+  warn "Codex managed sandbox may block agent-browser's local daemon socket. If launch fails with 'Operation not permitted', rerun the agent-browser command with escalated execution"
+fi
+
+# 6. Daemon state — flags like --executable-path/--args only apply at daemon START
 if pgrep -f "agent-browser.*daemon" >/dev/null 2>&1 || pgrep -f "agent-browser-daemon" >/dev/null 2>&1; then
   warn "an agent-browser daemon is already running — daemon-start flags (--executable-path, --args) are SILENTLY IGNORED until you run: agent-browser close"
 else
