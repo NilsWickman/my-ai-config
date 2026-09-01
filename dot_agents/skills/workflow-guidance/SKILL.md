@@ -1,8 +1,10 @@
 ---
-name: workflow-baseline
-description: Build one task through serial, resumable gates whose auditors are paid to disagree.
+name: workflow-guidance
+description: Build one task through serial, resumable workflow gates and maintain the script safely.
 disable-model-invocation: true
 ---
+
+# Workflow guidance
 
 A **baseline** Workflow script, adapted once per repo and then run once per task. It carries a task from spec to a wrapped commit through **gates** that no single agent can talk its way past, because each producing role is paired with a role that wins by disagreeing.
 
@@ -27,7 +29,7 @@ The blindness rules are the product. They live below the FROZEN line in the scri
 ## Where things live
 
 ```
-~/.local/state/workflow-baseline/<repo>-<hash>/
+~/.local/state/workflow-guidance/<repo>-<hash>/
   baseline.js            the adapted copy, which is this repo's configuration
   <workspace>/           one run: NN-stage.md artifacts plus .lock/
 ```
@@ -36,7 +38,7 @@ Resolve the root the same way every time, from anywhere inside the repo:
 
 ```sh
 COMMON=$(realpath "$(git rev-parse --git-common-dir)")
-ROOT="$HOME/.local/state/workflow-baseline/$(basename "$(dirname "$COMMON")")-$(printf %s "$COMMON" | sha256sum | cut -c1-8)"
+ROOT="$HOME/.local/state/workflow-guidance/$(basename "$(dirname "$COMMON")")-$(printf %s "$COMMON" | sha256sum | cut -c1-8)"
 ```
 
 `--git-common-dir` resolves to the same path from a repo and from any of its worktrees, so every worktree of one repo shares one adapted script. The hash keeps two same-named checkouts apart.
@@ -111,4 +113,6 @@ With `PARALLEL_SAFE` false, run one workspace at a time. The gates would otherwi
 
 ## Editing the script
 
-The Workflow-tool rules that govern this script, including what breaks resume, are in the `workflow-scripts` skill. Read it before changing anything below the FROZEN line.
+Everything below the FROZEN line defines the gate contract. Before changing or running it, account for every `await agent(` call. A serial stage returning `null` means agent death, so stop the run with `died(stage)` and let the next invocation resume. Only independent fan-out work may drop a null result, and then it must count and report every dropped member.
+
+Invoke the saved workflow by `scriptPath`, never by name. Name invocation may use a session-start snapshot and ignore later edits. Before each run, check that no null result can flow into a later stage and that every resumable artifact has a binary completion status.

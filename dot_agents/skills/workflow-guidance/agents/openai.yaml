@@ -1,0 +1,7 @@
+interface:
+  display_name: "Workflow Guidance"
+  short_description: "Run and maintain the gated workflow"
+  default_prompt: "Use $workflow-guidance to adapt, run, resume, or maintain the gated task workflow."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,5 +1,5 @@
 export const meta = {
-  name: 'workflow-baseline',
+  name: 'workflow-guidance',
   description: 'Build one task through serial, resumable gates whose auditors are paid to disagree',
   whenToUse: 'One well-specified task in an adapted repo. Serial and resumable: every stage writes <workdir>/NN-stage.md and skips itself once that artifact is complete.',
   phases: [
@@ -13,10 +13,10 @@ export const meta = {
 
 // ===========================================================================
 // ADAPT ZONE. Edit only above the FROZEN line. Everything here is pinned once
-// per repo by the workflow-baseline skill's adapt branch, then left alone.
+// per repo by the workflow-guidance skill's adapt branch, then left alone.
 // ===========================================================================
 
-const BASE_VERSION = 'workflow-baseline base 1'
+const BASE_VERSION = 'workflow-guidance base 1'
 
 // The repo's green bar, as shell. Several lines are fine: bring up whatever the
 // gate needs, fail red with a plain instruction when a precondition is missing,
@@ -64,7 +64,7 @@ const A = typeof args === 'string' ? JSON.parse(args) : (args || {})
 const task = A.task
 const dir = A.workdir
 if (!task || !dir || !String(dir).startsWith('/')) {
-  return { error: 'the workflow-baseline skill passes { task, workdir }, and workdir must be absolute' }
+  return { error: 'the workflow-guidance skill passes { task, workdir }, and workdir must be absolute' }
 }
 
 const brief = A.brief
@@ -159,7 +159,7 @@ const lensFiles = []
 for (const lens of LENSES) {
   const file = `05-${lens.name}.md`
   lensFiles.push(file)
-  await agent(
+  const lensResult = await agent(
     idem(file) + ws +
     `You are the ${lens.name.toUpperCase()} AUDITOR for ${task}. INCENTIVE: ${lens.brief}. ` +
     `Judge against ${lens.grounding}, which is the standard you review to, not your own taste. Read it first. ` +
@@ -169,10 +169,11 @@ for (const lens of LENSES) {
     `with what you actually checked. Findings face a refutation pass, so report only what you verified.`,
     { label: `${lens.name}:${task}`, phase: 'Verify', ...m(lens.name) },
   )
+  if (lensResult === null) return died(`lens:${lens.name}`)
 }
 
 const refuteInputs = [`${dir}/04-uat.md`, ...lensFiles.map((f) => `${dir}/${f}`)].join(', ')
-await agent(
+const refute = await agent(
   idem('06-refute.md') + ws +
   `You are the REFUTER for ${task}. Read ${refuteInputs}. For every FAIL or finding, try to REFUTE it against the actual ` +
   `code and spec: is it real, reproducible, and in scope? ` +
@@ -180,9 +181,10 @@ await agent(
   `The findings you confirm are this workflow's true output, so be as hard on the auditors as they were on the builder.`,
   { label: `refute:${task}`, phase: 'Verify', ...m('refute') },
 )
+if (refute === null) return died('refute')
 
 phase('Wrap')
-await agent(
+const simplify = await agent(
   idem('07-simplify.md') + ws +
   `You are the SCOPE CUTTER for ${task}. Read the diff. INCENTIVE: the smallest honest diff. Flag over-engineering, dead ` +
   `code, needless abstraction, and anything not traceable to a spec criterion. ` +
@@ -191,6 +193,7 @@ await agent(
   `List riskier suggestions without applying them. Artifact: what you removed, what you suggest, the gate result.`,
   { label: `simplify:${task}`, phase: 'Wrap', ...m('simplify') },
 )
+if (simplify === null) return died('simplify')
 
 const wrapCommit = WRAP_POLICY === 'branch'
   ? `Then COMMIT in the worktree on ${wtBranch}: \`git add -A && git commit\` with your commit message, following the ` +
@@ -207,5 +210,6 @@ const wrap = await agent(
   `which block integration, (3) files changed, (4) a ready-to-use commit message body. ${wrapCommit}`,
   { label: `wrap:${task}`, phase: 'Wrap', ...m('wrap') },
 )
+if (wrap === null) return died('wrap')
 
 return { task, base: BASE_VERSION, parallelSafe: PARALLEL_SAFE, artifacts: dir, wrap }

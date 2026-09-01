@@ -65,19 +65,16 @@ skip chezmoi entirely.
 | `video` | Self-narrating product walkthrough videos of web apps with Playwright, incl. before/after A/B |
 | `diagnosing-bugs` | Diagnosis loop for hard bugs and performance regressions |
 | `domain-modeling` | Domain model discipline: DOMAIN.md, CONTEXT.md, glossaries, domain cards |
-| `dotfiles-sync` | Sync this repo between machines, add canonical skills, resolve drift |
+| `dotfiles` | Sync this repo between machines, add canonical skills, resolve drift |
 | `grilling` | Stress-test a plan, decision or idea by relentless questioning |
-| `grill-with-docs` | The same interview, but it produces ADRs and a glossary as it goes |
 | `handoff` | Compact the current conversation into a handoff document for another agent |
 | `loop-me` | Interview-driven spec building for workflows in a workspace |
 | `prototype` | Explore a user flow as several varying designs behind one previewer |
 | `tdd` | Test-driven development, red-green-refactor, integration tests |
-| `to-questionnaire` | Turn a decision you cannot answer into a questionnaire for someone who can |
 | `wait-what` | The last message did not land: re-pitch it |
 | `wayfinder` | Plan work larger than one agent session as a map of decision tickets |
 | `wizard` | Generate an interactive bash wizard for steps only a human can perform |
-| `workflow-baseline` | Build one task through serial, resumable gates whose auditors are paid to disagree |
-| `workflow-scripts` | Survival rules for multi-agent workflow scripts |
+| `workflow-guidance` | Build one task through serial, resumable gates and maintain its workflow script safely |
 | `workflow-work` | Workflow work that creates or cleans up resources, or handles temporary secrets |
 | `writing-for-agents` | How to write skills, AGENTS.md and CLAUDE.md so agents actually follow them |
 

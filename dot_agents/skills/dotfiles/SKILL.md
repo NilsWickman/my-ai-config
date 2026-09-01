@@ -1,10 +1,10 @@
 ---
-name: dotfiles-sync
-description: Sync chezmoi-managed agent dotfiles (AGENTS.md, skills, tool configs) between machines. Use when asked to sync/propagate config or skills across machines, add or edit a canonical skill or AGENTS.md, pull the latest dotfiles, bootstrap a new machine, or when chezmoi status/diff shows drift.
-user-invocable: false
+name: dotfiles
+description: Sync chezmoi-managed agent dotfiles between machines.
+disable-model-invocation: true
 ---
 
-# Dotfiles sync (chezmoi)
+# Dotfiles (chezmoi)
 
 Shared config for AI coding agents (Claude Code, Codex CLI, pi) synced between
 machines with chezmoi.

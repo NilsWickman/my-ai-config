@@ -1,0 +1,7 @@
+interface:
+  display_name: "Dotfiles"
+  short_description: "Sync shared agent configuration"
+  default_prompt: "Use $dotfiles to update or synchronize the chezmoi-managed agent configuration."
+
+policy:
+  allow_implicit_invocation: false
