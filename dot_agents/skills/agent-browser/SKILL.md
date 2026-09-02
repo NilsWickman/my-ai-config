@@ -56,15 +56,15 @@ scripts/check-setup.sh    # relative to this skill's directory
 ### Codex managed sandboxes
 
 The browser daemon needs a writable Unix socket and permission to bind local
-sockets. If startup reports a read-only `/run/user/.../agent-browser` directory
+sockets. When Codex provides both `CODEX_NETWORK_ALLOW_LOCAL_BINDING=1` and
+`AGENT_BROWSER_SOCKET_DIR`, run browser commands normally in the sandbox. The
+socket directory avoids the read-only `/run/user/...` path.
+
+If either variable is absent and startup reports a read-only socket directory
 or `Failed to bind ... Operation not permitted`, rerun the actual
 `agent-browser` command outside the restricted sandbox. In Codex, request
-escalated execution with the reusable prefix `["agent-browser"]`.
-
-Setting `XDG_RUNTIME_DIR` to a writable directory fixes only the filesystem
-part. It does not grant local socket binding. Commands such as
-`agent-browser skills get core` do not start the daemon and may succeed even
-when browser commands are still blocked.
+escalated execution with the reusable prefix `["agent-browser"]`. A changed
+Codex environment applies only to a new Desktop process.
 
 ### Linux / headless servers
 

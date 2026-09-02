@@ -75,15 +75,20 @@ if [ -r /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
 fi
 
 # 5. Runtime socket permissions
-RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
-if [ -d "$RUNTIME_DIR" ] && [ -w "$RUNTIME_DIR" ]; then
-  ok "runtime directory is writable: $RUNTIME_DIR"
+SOCKET_DIR="${AGENT_BROWSER_SOCKET_DIR:-${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/agent-browser}"
+SOCKET_PARENT="$(dirname "$SOCKET_DIR")"
+if [ -d "$SOCKET_PARENT" ] && [ -w "$SOCKET_PARENT" ]; then
+  ok "agent-browser socket directory can be created: $SOCKET_DIR"
 else
-  warn "runtime directory is not writable: $RUNTIME_DIR. Set XDG_RUNTIME_DIR to a writable directory before starting agent-browser"
+  warn "agent-browser socket directory cannot be created: $SOCKET_DIR. Set AGENT_BROWSER_SOCKET_DIR under a writable directory"
 fi
 
-if [ -n "${CODEX_PERMISSION_PROFILE:-}" ] && [ -z "${CODEX_NETWORK_ALLOW_LOCAL_BINDING:-}" ]; then
-  warn "Codex managed sandbox may block agent-browser's local daemon socket. If launch fails with 'Operation not permitted', rerun the agent-browser command with escalated execution"
+if [ -n "${CODEX_PERMISSION_PROFILE:-}" ]; then
+  if [ "${CODEX_NETWORK_ALLOW_LOCAL_BINDING:-}" = "1" ]; then
+    ok "Codex local socket binding enabled"
+  else
+    warn "Codex managed sandbox may block agent-browser's local daemon socket. If launch fails with 'Operation not permitted', rerun the agent-browser command with escalated execution"
+  fi
 fi
 
 # 6. Daemon state — flags like --executable-path/--args only apply at daemon START
