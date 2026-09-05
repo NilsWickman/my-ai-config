@@ -59,7 +59,6 @@ skip chezmoi entirely.
 
 | Skill | What it is for |
 |---|---|
-| `agent-browser` | Browser automation CLI for agents: navigate, fill forms, screenshot, scrape, test web apps |
 | `commitgroup` | Stage and commit changes in coherent, reviewable groups |
 | `demo-images` | Low-fidelity prototypes: show a few distinct visual alternatives |
 | `video` | Self-narrating product walkthrough videos of web apps with Playwright, incl. before/after A/B |

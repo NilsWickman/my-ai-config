@@ -57,7 +57,7 @@ Read [`baseline.js`](baseline.js) in this skill directory. Copy it to `$ROOT/bas
 
 Resolve each pin by looking, not by assuming:
 
-- **VERIFY** is the repo's green bar. Read the Makefile, the `package.json` scripts, the CI workflow, and any verify or test skill the repo ships. It may be `make verify`, `make test`, a test runner plus a typechecker plus a linter, or an agent-browser flow. Write it as shell, however many lines it takes, including any service or database bring-up and a precondition that fails red with a plain instruction rather than hanging. A repo with no suite gets its strongest static checks pinned and reports `VERDICT: unverified`, which blocks wrap.
+- **VERIFY** is the repo's green bar. Read the Makefile, the `package.json` scripts, the CI workflow, and any verify or test skill the repo ships. It may be `make verify`, `make test`, a test runner plus a typechecker plus a linter, or a browser flow using the current harness's built-in tools. Write it as shell, however many lines it takes, including any service or database bring-up and a precondition that fails red with a plain instruction rather than hanging. A repo with no suite gets its strongest static checks pinned and reports `VERDICT: unverified`, which blocks wrap.
 - **SPEC_SOURCES** names where a task's requirements live: a backlog file, an issue tracker, a wayfinder ticket.
 - **SANDBOX** says how UAT observes running behaviour, and names the live ports and services it must leave alone. This pin is what keeps a probe off production.
 - **LENSES** stays empty unless the repo has a written standard worth auditing against. A lens with no grounding document invents its own standard and reports noise.

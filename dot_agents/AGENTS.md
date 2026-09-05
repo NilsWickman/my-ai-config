@@ -37,6 +37,8 @@ its own style; hand it the convention reference file there.
 
 # Tool Guidance
 
+For browser and UI work, use the browser/computer-use tools supplied by the current agent harness. Follow its session and tool instructions. Verify visual rendering from actual screenshots of the relevant loaded states; a DOM or accessibility snapshot alone does not prove layout correctness.
+
 Use offset and limit parameters to read only the sections you need. Avoid re-reading entire files when you only need a few lines.
 Prefer to not use workflows or subagents. If a perfect situation or the user requests it they can be used.
 
