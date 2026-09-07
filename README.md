@@ -70,6 +70,7 @@ skip chezmoi entirely.
 | `loop-me` | Interview-driven spec building for workflows in a workspace |
 | `prototype` | Explore a user flow as several varying designs behind one previewer |
 | `tdd` | Test-driven development, red-green-refactor, integration tests |
+| `tidsrapport` | Propose weekly timesheet rows from ThreadForge, Claude Code activity, git and Odoo |
 | `wait-what` | The last message did not land: re-pitch it |
 | `wayfinder` | Plan work larger than one agent session as a map of decision tickets |
 | `wizard` | Generate an interactive bash wizard for steps only a human can perform |

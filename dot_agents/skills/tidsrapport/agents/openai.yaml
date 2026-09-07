@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tidsrapport"
+  short_description: "Propose the week's time report from activity, git and Odoo"
+
+policy:
+  allow_implicit_invocation: false
