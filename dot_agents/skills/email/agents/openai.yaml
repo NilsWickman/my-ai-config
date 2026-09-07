@@ -1,0 +1,3 @@
+interface:
+  display_name: "Email"
+  short_description: "Draft or revise a client email for the user"

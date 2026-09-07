@@ -62,12 +62,15 @@ skip chezmoi entirely.
 | `commitgroup` | Stage and commit changes in coherent, reviewable groups |
 | `demo-images` | Low-fidelity prototypes: show a few distinct visual alternatives |
 | `video` | Self-narrating product walkthrough videos of web apps with Playwright, incl. before/after A/B |
+| `dev-env` | Start and verify a development environment, then hand over its URL and login |
 | `diagnosing-bugs` | Diagnosis loop for hard bugs and performance regressions |
 | `domain-modeling` | Domain model discipline: DOMAIN.md, CONTEXT.md, glossaries, domain cards |
 | `dotfiles` | Sync this repo between machines, add canonical skills, resolve drift |
+| `email` | Draft concise client emails with verified claims and clear next steps |
 | `grilling` | Stress-test a plan, decision or idea by relentless questioning |
 | `handoff` | Compact the current conversation into a handoff document for another agent |
 | `loop-me` | Interview-driven spec building for workflows in a workspace |
+| `probe` | Test model knowledge before adding instructions to a skill |
 | `prototype` | Explore a user flow as several varying designs behind one previewer |
 | `tdd` | Test-driven development, red-green-refactor, integration tests |
 | `tidsrapport` | Propose weekly timesheet rows from ThreadForge, Claude Code activity, git and Odoo |
