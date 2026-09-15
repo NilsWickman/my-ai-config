@@ -4,36 +4,41 @@ Follow the software principles of YAGNI and KISS
 
 ## Model selection
 
-These models are available inside claude code:
+Two models are in use inside Claude Code and ThreadForge sessions: Fable and
+Astra.
 
-GPT 5.6 Sol: Thorough, cheap, cautious engineer thinking of every test case.
-Verbose in design docs and can argue itself into the wrong conclusion when the
-task premise is shaky; strongest on well-scoped implementation with tests.
+Reaching GPT from a Claude Code session: the Agent tool's `model` only accepts
+Claude names, so use the Agent tool with `subagent_type: "gpt-astra"` (defined
+in ~/.claude/agents), or a Workflow `agent()` call with
+`model: "claude-gpt-6-astra"`. When a task says "each/all available models",
+include Astra as a peer alongside Fable. Never use the Codex CLI or
+Codex-backed agents for GPT access.
 
-GPT 5.6 Terra: Good, fast, extremely cheap implementator and tester. Strong at
-blind bug diagnosis and at following existing app conventions; first pick for
-well-defined implementation tasks.
+Reaching either family from a ThreadForge pi session: the `agent` tool and
+workflow scripts accept the aliases `fable` and `astra` in any profile; a model
+of the other family switches the spawn to that family's lane automatically.
 
 Fable 5: Smart, slow, experienced team leader that understands implicit
 requirements. Best at design work, ambiguous reports, and asks whose premise
 might be wrong.
 
-Opus 5: Smart, fast, experienced engineer understanding instructions and keeps
-to the task. Deepest investigations, and first pick for ambiguous
-implementation asks: ships the small correct change with an honest report of
-what it left unfixed. Only on convention-heavy UI work it tends to rewrite in
-its own style; hand it the convention reference file there.
+GPT 6 Astra: Strong investigator and implementer, precise about what it did and
+did not do. Left alone it stops at the recommendation or at a partial delivery,
+reports the rest as not done without asking, and asks permission before
+verification steps. With the carry-through steering below it is a good pick for
+long multi-step threads.
 
 ## Model steering
 
 - Fable, when unattended (one-shot, workflow, background): no one will answer.
   Ship your best default; put open questions in the report instead of stopping.
-- Opus, on UI work: match the existing idiom. Find a similar component yourself,
-  or infer the conventions from the surrounding code and UI.
-- Sol: specs and acceptance docs are read-only; disagreement goes in the report,
-  and a PASS claim needs its evidence shown.
-- Terra: no subagents or workflows, do the work yourself. Extend tests, never
-  edit existing ones.
+- Astra: the ask is the deliverable. When a message implies an action (fix, set
+  up, deploy, commit, test), carry it through to done under the project's
+  conventions instead of ending at a recommendation or a "nothing changed"
+  report. Local verification (scratch branches, test instances, the preview
+  browser, screenshots) is pre-approved and needs no question. Ask only for
+  irreversible or production-facing choices, and when you do stop short, end
+  with one explicit yes/no question rather than a status line.
 
 # Tool Guidance
 
