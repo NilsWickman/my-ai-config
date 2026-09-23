@@ -2,11 +2,11 @@
 
 ## Schema
 
-Fixed across all projects — the identical structure is what makes project switching cheap. Section names stay in Swedish; body language follows the project.
+Fixed across all projects: the identical structure is what makes project switching cheap. Section names stay in Swedish; body language follows the project.
 
 ```markdown
-# <domän> — domänkort
-Syfte: <1 rad, affärstermer — vad och varför>
+# <domän>: domänkort
+Syfte: <1 rad, affärstermer, vad och varför>
 Aktörer: <vem producerar, vem konsumerar, vem äger>
 
 ## Språk          <!-- max ~7 begrepp som bär domänen -->
@@ -27,14 +27,14 @@ Aktörer: <vem producerar, vem konsumerar, vem äger>
 - **Index, not store.** Gist and link; never restate what a ticket, README, or the code already holds.
 - **Språk maps both directions**: domain term → one-line definition → technical name. This section doubles as ubiquitous language for agents, so future sessions name things the way the humans talk.
 - **Regler vs Avgränsningar**: Regler must always hold (the contract); Avgränsningar are consciously out of scope. Unresolved rules carry an explicit "öppen fråga" marker so the open reads differently from the decided.
-- **Läge is dated** so staleness is visible at a glance. It links to the moving parts (wayfinder map, tracker); the card holds only the stable.
-- **Multi-context projects**: one card per bounded context plus a context-map card that only lists the contexts and their relationships. Same schema, more cards — never a longer card.
+- **Läge is dated** so staleness is visible at a glance. It links to the moving parts (tracker, open tickets); the card holds only the stable.
+- **Multi-context projects**: one card per bounded context plus a context-map card that only lists the contexts and their relationships. Same schema, more cards, never a longer card.
 
-## Deep dives — `domain/`
+## Deep dives: `domain/`
 
 When a term needs more than its Språk line, it gets its own file in `domain/` next to the card (e.g. `domain/cutters.md`), linked from the term's line in the card. The card's cap never moves.
 
-- **Created on demand, never up front** — a deep dive without a reader is maintenance debt.
+- **Created on demand, never up front**: a deep dive without a reader is maintenance debt.
 - **First line is the term's Språk definition verbatim**; then what is true, where the truth lives (code, spec, thread, mail), and open questions.
 - Same index-not-store principle as the card: gist and link instead of copying code or spec. No length cap, but everything earns its place.
 - `CONTEXT.md` stays a glossary; deep dives always live in `domain/`.
@@ -47,21 +47,21 @@ Three renderings of the same content, for different questions:
 |---|---|---|
 | **Kort** | "What must I own in 30 seconds?" | Default, every project |
 | **Uppslag** | "How do these two projects compare?" | Two cards as A4 sheets side by side |
-| **Domänkarta** | "Show me the whole terrain — what am I forgetting?" | Large, messy projects only; overkill for small ones |
+| **Domänkarta** | "Show me the whole terrain. What am I forgetting?" | Large, messy projects only; overkill for small ones |
 
-- **Uppslag**: two A4 sheets, one project each, sections row-aligned across both sheets (CSS subgrid) so the eye sweeps horizontally — Läge faces Läge, Regler faces Regler. A section with less content gets air, not a shifted layout: empty space is information.
+- **Uppslag**: two A4 sheets, one project each, sections row-aligned across both sheets (CSS subgrid) so the eye sweeps horizontally: Läge faces Läge, Regler faces Regler. A section with less content gets air, not a shifted layout: empty space is information.
 - **Domänkarta**: root carries a one-line truth about the project; one side is the value chain in flow order (numbered), the other side is the stable structure (actors, masterdata, rules, tech). Every leaf carries a status marker. Deep-dives per branch are made on demand, never up front.
 
 ## Status vocabulary
 
 Same markers at every zoom level:
 
-- **Green** — exists / proven (tests pass, delivered, validated)
-- **Yellow** — pending / to build / open question
-- **Square (green)** — load-bearing rule
-- **✕ (grey)** — exclusion, deviation, or legacy
-- One **identity color** per project, accents only (top edge, flow nodes, markers) — all text in neutral ink tones.
+- **Green**: exists / proven (tests pass, delivered, validated)
+- **Yellow**: pending / to build / open question
+- **Square (green)**: load-bearing rule
+- **✕ (grey)**: exclusion, deviation, or legacy
+- One **identity color** per project, accents only (top edge, flow nodes, markers); all text in neutral ink tones.
 
 ## Rendering
 
-Cards are markdown first; images are for meetings and comparison. Render via the demo-images skill's approach: one self-contained HTML mockup, Playwright element screenshot at deviceScaleFactor 2, output kept next to the mockup in a durable `artifacts/` dir. Content comes from the `DOMAIN.md` files — when a card changes, re-render; the image is never the source of truth.
+Cards are markdown first; images are for meetings and comparison. Render via the demo-images skill's approach: one self-contained HTML mockup, Playwright element screenshot at deviceScaleFactor 2, output kept next to the mockup in a durable `artifacts/` dir. Content comes from the `DOMAIN.md` files: when a card changes, re-render; the image is never the source of truth.

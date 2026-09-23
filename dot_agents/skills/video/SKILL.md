@@ -35,7 +35,7 @@ layer; it belongs inside the product video, wherever it goes.
 1. **Stage demo state with a story.** Real features demand real data: seed the
    app so every scene shows the product genuinely working (create the records,
    run the crons, trigger the events beforehand). Give data a narrative
-   (named companies, a before/after change) — viewers follow stories, not
+   (named companies, a before/after change): viewers follow stories, not
    fixtures.
    **Stage with the camera off, and cache what you staged.** When the product
    itself is a long-running process, the temptation is to start it and film the
@@ -69,7 +69,7 @@ layer; it belongs inside the product video, wherever it goes.
    that failed instead of the four good ones before it, and `join()` puts them
    back together at no cost. A full page load or device change between scenes
    makes it mandatory, since it flashes on camera. Splitting is not free
-   though — each scene re-enters the app (page load, wait for its anchor,
+   though: each scene re-enters the app (page load, wait for its anchor,
    settle), so a scene costs several seconds before its first beat. Measured on
    ThreadForge, going from two chapters to four scenes added ~16 s to a 94 s
    take. Split by what you would retake independently, not as finely as
@@ -85,7 +85,7 @@ layer; it belongs inside the product video, wherever it goes.
    time. The copied `lib.js` rejects captions without a positive hold and has no
    switch for removing the timer; preserve that enforcement when adapting it.
    Drive every interaction through the
-   lib's `moveTo`/`click`/`hoverBeat`/`typeInto` wrappers — they animate a
+   lib's `moveTo`/`click`/`hoverBeat`/`typeInto` wrappers. They animate a
    visible cursor with human easing and a click pulse; a raw `locator.click()`
    teleports invisibly and reads as scripted. Use `callout(selector, text)` for
    "look here" beats (highlight ring + pointing bubble) and keep captions for
@@ -104,7 +104,7 @@ layer; it belongs inside the product video, wherever it goes.
 4. **Review the footage.** Run [`scripts/review.js`](scripts/review.js) on every
    clip: `node review.js videos-raw/*/*.webm`. It does the mechanical checks
    (freezes, black lead-in and tail, duration) and renders **two images per
-   clip** — a timestamped contact sheet of the whole clip, and a crop of the
+   clip**: a timestamped contact sheet of the whole clip, and a crop of the
    caption band stacked one sample per row so caption text stays readable.
    *Look at both.* Do not go back to reading one extracted PNG per frame: it is
    the slowest part of the whole skill, and most of those frames show a caption
@@ -124,7 +124,7 @@ layer; it belongs inside the product video, wherever it goes.
    mechanical was caught.
 5. **Fix and re-record.** Repair data/script/product, delete the old raw dir,
    re-run, re-review. Selector fights (intercepted pointer events, hidden
-   hover checkboxes) are normal — see
+   hover checkboxes) are normal, see
    [`PLAYWRIGHT-TRICKS.md`](PLAYWRIGHT-TRICKS.md). Done when: step 4 passes
    for all videos.
 6. **Assemble and finalize.** Trim each clip's blank/loading lead-in and
@@ -140,7 +140,7 @@ layer; it belongs inside the product video, wherever it goes.
    them before delivery. Use descriptive kebab-case names
    (`product-1-feature.mp4`), deliver to a durable directory (rules below), and
    clean up demo residue created in the app. Done when: duration is verified via
-   ffprobe and the path is reported — as an **absolute path** if the chat UI
+   ffprobe and the path is reported, as an **absolute path** if the chat UI
    renders inline video.
 
    Delivery durability rules: a shared link or inline chat render streams the
@@ -156,7 +156,7 @@ layer; it belongs inside the product video, wherever it goes.
 
 - Caption bar = the whole narration system: a fixed-position DOM element
   injected by `page.evaluate` (survives soft navigations within an SPA;
-  re-inject after full page loads — `caption()` handles both). Its colours,
+  re-inject after full page loads; `caption()` handles both). Its colours,
   variants and emphasis markup are in [`STYLE.md`](STYLE.md).
 - Pointer motion is deterministic: all jitter comes from a seeded PRNG, so a
   re-record is comparable to the take it replaces. Never call `Math.random()`
@@ -169,7 +169,7 @@ layer; it belongs inside the product video, wherever it goes.
   `mousedown` events, so it survives navigations and needs no per-scene code;
   `moveTo` animates the real Playwright mouse (hover states are genuine).
   If a callout bubble would sit in the lower third, the caption bar may
-  collide — hide one of them for that beat.
+  collide; hide one of them for that beat.
 - Give the script a no-record `--probe` mode that navigates each scene,
   verifies every callout selector, and prints the measured wall-clock time of
   every transition wait (page load, polling loop, backend event). Treat a

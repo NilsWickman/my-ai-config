@@ -4,7 +4,7 @@
 //
 // Human-feel layer: a fake cursor overlay is injected via addInitScript and
 // follows the *real* Playwright mouse (so hover states are genuine). Always
-// drive interactions through moveTo()/click()/typeInto() — raw locator.click()
+// drive interactions through moveTo()/click()/typeInto(); raw locator.click()
 // teleports and looks scripted on camera.
 //
 // Motion is DETERMINISTIC: every jitter comes from a seeded PRNG, so two runs

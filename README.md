@@ -60,7 +60,6 @@ skip chezmoi entirely.
 | Skill | What it is for |
 |---|---|
 | `commitgroup` | Stage and commit changes in coherent, reviewable groups |
-| `demo-images` | Low-fidelity prototypes: show a few distinct visual alternatives |
 | `video` | Self-narrating product walkthrough videos of web apps with Playwright, incl. before/after A/B |
 | `dev-env` | Start and verify a development environment, then hand over its URL and login |
 | `diagnosing-bugs` | Diagnosis loop for hard bugs and performance regressions |
@@ -75,10 +74,6 @@ skip chezmoi entirely.
 | `tdd` | Test-driven development, red-green-refactor, integration tests |
 | `tidsrapport` | Propose weekly timesheet rows from ThreadForge, Claude Code activity, git and Odoo |
 | `wait-what` | The last message did not land: re-pitch it |
-| `wayfinder` | Plan work larger than one agent session as a map of decision tickets |
-| `wizard` | Generate an interactive bash wizard for steps only a human can perform |
-| `workflow-guidance` | Build one task through serial, resumable gates and maintain its workflow script safely |
-| `workflow-work` | Workflow work that creates or cleans up resources, or handles temporary secrets |
 | `writing-for-agents` | How to write skills, AGENTS.md and CLAUDE.md so agents actually follow them |
 
 Skills follow the [Agent Skills](https://code.claude.com/docs/en/skills)

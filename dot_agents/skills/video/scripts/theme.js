@@ -71,9 +71,9 @@ async function adoptAppTheme(page, varNames = ['--accent', '--primary', '--color
 }
 
 // On-screen text must not contain em dashes (house style); rewrite the common
-// "clause — clause" pattern instead of trusting script authors.
+// "clause, em dash, clause" pattern instead of trusting script authors.
 function cleanOnScreenText(text) {
-  return String(text).replace(/\s*—\s*/g, ', ');
+  return String(text).replace(/\s*\u2014\s*/g, ', ');
 }
 
 // `**word**` becomes an accent-coloured emphasis. Everything else is escaped:

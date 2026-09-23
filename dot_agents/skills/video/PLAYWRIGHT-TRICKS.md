@@ -1,7 +1,7 @@
 # Playwright tricks for recording rich web UIs
 
 Hard-won selector patterns from recording SPA admin UIs (Odoo etc.). Reach for
-these when a click times out — read the Playwright call log first; it names
+these when a click times out: read the Playwright call log first; it names
 the blocker.
 
 ## "element intercepts pointer events" on row hover-checkboxes
@@ -18,7 +18,7 @@ await page.evaluate(() => {
 ```
 
 `check({ force: true })` is *not* enough when the input is `disabled` until
-hover — the DOM `.click()` path works because the app's own delegate handles
+hover; the DOM `.click()` path works because the app's own delegate handles
 it.
 
 ## Search: type into the searchbox, not the facet DOM
@@ -34,7 +34,7 @@ await page.keyboard.press('Enter');
 
 For *filters* (not text search), open the filter dropdown and click the
 `.o_menu_item` by text, then **wait for the facet to appear** before moving
-on — the click can silently miss during animation:
+on; the click can silently miss during animation:
 
 ```js
 await page.locator('.o-dropdown--menu .o_menu_item:has-text("Health: Critical")').first().click();
@@ -44,7 +44,7 @@ await page.locator('.o_searchview .o_facet_value:has-text("Health: Critical")').
 ## Empty-state ghosts look like data
 
 Odoo-style list views render greyed *sample rows* when there are zero real
-records. A frame review that shows rows may still be an empty list — check for
+records. A frame review that shows rows may still be an empty list: check for
 the overlaid "Create a …" hint text. If seen: the demo data is wrong (e.g.
 records created with a different type/stage than the menu filters on).
 
@@ -56,7 +56,7 @@ click-navigation for moments the video should *show* navigation.
 
 ## Modals: fields may be prefilled
 
-After opening a wizard from a button, don't assume inputs are empty — filling
+After opening a wizard from a button, don't assume inputs are empty: filling
 an already-prefilled field can double text. Read the modal state first, or
 use `fill()` (which clears) rather than `type()`.
 
@@ -81,7 +81,7 @@ Pressing Enter in the password field races SPA bootstrapping in some apps.
 
 `page.waitForTimeout` between scenes is fine *for recordings* (it is real
 time on film). For assertions before an action, prefer `waitFor()` on a
-state selector — timeouts hide races that show up as mid-transition frames.
+state selector; timeouts hide races that show up as mid-transition frames.
 Wait for the scene's stable, user-visible state before adding its caption.
 
 ## Prevent flicker at scene boundaries
@@ -96,13 +96,13 @@ not merely recording lead-in.
 ## Always stop() in finally
 
 An unhandled error in a recording script leaves Chromium open, so the node
-process never exits — a run that "hangs" instead of failing is almost always
+process never exits. A run that "hangs" instead of failing is almost always
 this. Wrap the scene body in `try { ... } finally { await stop(rec); }`.
 
 ## Native confirm() dialogs are auto-dismissed
 
 Playwright cancels native `alert`/`confirm` dialogs by default, and nothing
-shows in screenshots — an action that "silently does nothing" (e.g. a Remove
+shows in screenshots. An action that "silently does nothing" (e.g. a Remove
 that needs confirmation) is often this. Register
 `page.on('dialog', d => d.accept())` before triggering the action.
 
@@ -140,7 +140,7 @@ the app's component tree, and deleting it out from under the framework can take
 the rest of the UI with it.
 
 An un-dismissed update toast is not only ugly. If the update applies, the app
-reloads mid-scene and every piece of state the take had built up — an open
-panel, an expanded phase — is gone, while the captions keep narrating it.
+reloads mid-scene and every piece of state the take had built up (an open
+panel, an expanded phase) is gone, while the captions keep narrating it.
 `addLocatorHandler` does not cover this: it only fires when an overlay blocks an
 action, and a reading beat performs no action at all.

@@ -1,12 +1,27 @@
 ---
 name: mechanize
-description: Turn a noticed problem into a mechanism (type, lint, helper, runtime check) instead of an instruction.
+description: Turn a noticed problem, or the slips found reviewing a session, into mechanisms (type, lint, helper, runtime check) instead of instructions.
 disable-model-invocation: true
 ---
 
 # Mechanize
 
-A rule that lands as text can slip; one that lands as a mechanism cannot. The user has noticed a problem and asks whether it can be mechanized.
+A rule that lands as text can slip; one that lands as a mechanism cannot. Two ways in:
+
+- The user has noticed a problem and asks whether it can be mechanized: start at step 1.
+- The user asks for a retro on a session, or names no problem: run **Review** first, then take each candidate the user picks through the steps.
+
+## Review
+
+1. **Read the session.** Default to the current one. For a past ThreadForge thread, find it with `~/.agents/skills/recall/scripts/recall.py search <words>`, then read it with `show <id-prefix> --full`; Claude Code CLI sessions live in `~/.claude/projects/`. Done when you can point to the turns where the agent went wrong, went slow, or lacked something.
+2. **Sort the slips** through these lenses:
+   - **Navigation**: the agent searched long for a file or fact. Could a pointer, or moving the fact to where the agent looks, have saved it?
+   - **Automated checks**: the agent made a mistake a type, lint, test or hook could have caught. Read the repo's own check commands and CI first: a check that exists but is unwired or broken is the finding. A repo with no pre-commit hook and no CI running lint, typecheck and tests is a finding on its own.
+   - **Review rules**: a review let a mistake through. A mechanical violation (fixed pattern, banned API, import shape, file location) gets a check; only a judgement call gets text.
+   - **Steering bloat**: lines in a repo or global `CLAUDE.md`/`AGENTS.md` that a check could replace, or that change no behaviour.
+   - **Tool economy**: expensive or token-heavy tool calls that a script, flag or narrower query would shrink.
+   - **Information access**: a fact the agent needed but could not reach (dev server logs, read-only access to a service).
+3. **Present the candidates** by severity, one sentence each: the slip, with the turn it happened on, and the rung you expect it to reach. Stop until the user picks.
 
 ## Steps
 

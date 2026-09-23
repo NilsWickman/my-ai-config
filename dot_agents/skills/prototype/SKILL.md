@@ -1,10 +1,15 @@
 ---
 name: prototype
-description: How to prototype different solutions preferred by the user. Focus on alternatives and varying designs.
+description: Prototype a design question, either as several UI alternatives behind one previewer or as a clickable state-machine demo for logic.
 disable-model-invocation: true
 ---
 
-This is the established path for how to establish and present prototypes. Used when the user wants different alternatives to choose between. Primarily used for different frontend design alternatives.
+Pick the branch from the question being answered:
+
+- **"What should this look like?"** Several alternative designs of a user flow: the steps below.
+- **"Does this logic or state model hold up?"** One clickable HTML file that drives the state machine through hard cases: follow [LOGIC.md](LOGIC.md).
+
+## UI alternatives
 
 1. Use a temporary directory that is gitignored like .tmp/
 2. Think about the data model and establish a shared preset available for all pages.
@@ -14,4 +19,4 @@ This is the established path for how to establish and present prototypes. Used w
 6. Serve the "application" so it outlives your session (systemd user unit or the project's long-job helper, never a plain background process), bound to 127.0.0.1. Give the user a DNS name, never a raw IP, so the link keeps working when the host moves.
 7. Give the user the names of each design and mention what else could be implemented for a suggested follow up.
 
-The goal of this skill is to explore alternatives of a user flow for interacting with an application. 
+The goal of this branch is to explore alternatives of a user flow for interacting with an application. 
