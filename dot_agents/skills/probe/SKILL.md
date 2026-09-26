@@ -1,6 +1,6 @@
 ---
 name: probe
-description: Probe the AI models' built-in knowledge before codifying it into a skill, so skills only carry what models get wrong. Domain-agnostic; builds the model/reasoning matrix from whatever the active session's harness offers.
+description: Probe the AI models' built-in knowledge before trying to automate in the information.
 disable-model-invocation: true
 ---
 
@@ -8,11 +8,11 @@ disable-model-invocation: true
 
 Before writing or extending a skill, test whether the models already hold the knowledge. Codify only what they miss; built-in knowledge in a skill is sediment that costs context and goes stale.
 
-What past probes taught (Odoo rounds, 2026-08): the models already knew everything documentation states plainly; every miss was a workflow-dependent fact that contradicts model priors (all probed models placed a module-rename migration in the wrong upgrade phase). That is the shape of knowledge worth codifying. A probe also audits your own draft: one round found a claim in our own skill was wrong.
+What past probes taught: the models already knew everything documentation states plainly; every miss was a workflow-dependent fact that contradicts model priors (all probed models placed a module-rename migration in the wrong upgrade phase). That is the shape of knowledge worth codifying. A probe also audits your own draft: one round found a claim in our own skill was wrong.
 
 ## Process
 
-1. **Extract claims.** From the incident, diff, or draft skill, list every factual claim you are about to codify, one line each.
+1. **Extract claims.** From the incident, diff, feedback system or draft skill, list every factual claim you are about to codify, one line each.
 2. **Establish ground truth from source, not memory.** Verify each claim against the domain's authoritative source (vendored code, pinned-version docs, or a disposable experiment). A claim you cannot ground stays out of the skill. This step also catches errors in the draft itself.
 3. **Write the probe file.** Numbered questions, each answerable from the claims, phrased neutrally (no hints toward the expected answer). Header, domain filled in:
 
@@ -23,7 +23,7 @@ What past probes taught (Odoo rounds, 2026-08): the models already knew everythi
 
    ```bash
    cd /tmp
-   claudex -p --model <model> "$(cat probe.md)" > <model>.out
+   claude -p --model <model> "$(cat probe.md)" > <model>.out
    codex exec -m <model> -c model_reasoning_effort=<level> - < probe.md > <model>-<level>.out
    ```
 
@@ -34,3 +34,5 @@ What past probes taught (Odoo rounds, 2026-08): the models already knew everythi
    - **Own draft was wrong** -> fix the draft/doc where it lives.
 
 Done when every extracted claim has a verdict and a placement, and no unverified claim remains in the skill text.
+User might specify specific models to test - user varying reasoning levels in that case.
+User might specify specific domains to test - Identify if those are clearly detailed in the conversation or project then.

@@ -1,6 +1,6 @@
 ---
 name: email
-description: Use to format email responses for the user.
+description: Read before drafting an email or other communication handoff.
 ---
 
 # Client email

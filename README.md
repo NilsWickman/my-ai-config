@@ -59,7 +59,6 @@ skip chezmoi entirely.
 
 | Skill | What it is for |
 |---|---|
-| `commitgroup` | Stage and commit changes in coherent, reviewable groups |
 | `video` | Self-narrating product walkthrough videos of web apps with Playwright, incl. before/after A/B |
 | `dev-env` | Start and verify a development environment, then hand over its URL and login |
 | `diagnosing-bugs` | Diagnosis loop for hard bugs and performance regressions |
