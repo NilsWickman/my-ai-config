@@ -71,7 +71,6 @@ skip chezmoi entirely.
 | `probe` | Test model knowledge before adding instructions to a skill |
 | `prototype` | Explore a user flow as several varying designs behind one previewer |
 | `tdd` | Test-driven development, red-green-refactor, integration tests |
-| `tidsrapport` | Propose weekly timesheet rows from ThreadForge, Claude Code activity, git and Odoo |
 | `wait-what` | The last message did not land: re-pitch it |
 | `writing-for-agents` | How to write skills, AGENTS.md and CLAUDE.md so agents actually follow them |
 
