@@ -65,14 +65,9 @@ skip chezmoi entirely.
 | `domain-modeling` | Domain model discipline: DOMAIN.md, CONTEXT.md, glossaries, domain cards |
 | `dotfiles` | Sync this repo between machines, add canonical skills, resolve drift |
 | `email` | Draft concise client emails with verified claims and clear next steps |
-| `grilling` | Stress-test a plan, decision or idea by relentless questioning |
-| `handoff` | Compact the current conversation into a handoff document for another agent |
 | `loop-me` | Interview-driven spec building for workflows in a workspace |
 | `probe` | Test model knowledge before adding instructions to a skill |
-| `prototype` | Explore a user flow as several varying designs behind one previewer |
-| `tdd` | Test-driven development, red-green-refactor, integration tests |
 | `wait-what` | The last message did not land: re-pitch it |
-| `writing-for-agents` | How to write skills, AGENTS.md and CLAUDE.md so agents actually follow them |
 
 Skills follow the [Agent Skills](https://code.claude.com/docs/en/skills)
 format: a directory with a `SKILL.md` carrying `name` and `description`
