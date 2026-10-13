@@ -14,12 +14,12 @@ machines with chezmoi.
 ```
 GitHub repo                                  ← shared truth between machines
   └─ chezmoi source  ~/.local/share/chezmoi/ ← local clone (source state)
-       └─ ~/.agents/AGENTS.md + ~/.agents/skills/   ← applied files (canonical on the machine)
-            └─ ~/.claude/*, ~/.codex/*, ~/.pi/agent/* ← symlinks into ~/.agents/
+       └─ ~/.agents/skills/                    ← applied skills (canonical on the machine)
+            └─ ~/.claude/skills, ~/.codex/skills, ~/.pi/agent/skills ← symlinks into ~/.agents/
 ```
 
-- **Never edit tool dirs** (`~/.claude/skills/...`, `~/.codex/AGENTS.md`, ...),
-  they are symlinks. `CLAUDE.md` is an alias for `~/.agents/AGENTS.md`.
+- **Never edit tool skill dirs** (`~/.claude/skills/...`), they are symlinks.
+- There are deliberately no global agent instructions (`AGENTS.md`/`CLAUDE.md`).
 - A local change is not "real" until committed **and pushed** from the source
   repo, otherwise it never reaches the other machines.
 

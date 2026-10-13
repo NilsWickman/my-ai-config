@@ -190,7 +190,7 @@ function wipe({
     '-f', 'lavfi', '-i', `color=c=${dividerColor}:s=3x${H}:r=${fps}`,
     '-filter_complex', chain.join(';'),
     '-map', '[v]', '-t', String(total),
-    '-c:v', 'libx264', '-crf', String(crf), '-preset', 'slow',
+    '-c:v', 'libx264', '-crf', String(crf), '-preset', 'fast',
     '-movflags', '+faststart', out,
   ]);
   const result = probe(out);
@@ -267,7 +267,7 @@ function join(inputs, out, { dip = 0, crossfade = 0, fadeOut = 0, fps = 30, crf 
     '-y', ...scenes.flatMap((s) => ['-i', s.file]),
     '-filter_complex', chain.join(';'),
     '-map', '[v]',
-    '-c:v', 'libx264', '-crf', String(crf), '-preset', 'slow',
+    '-c:v', 'libx264', '-crf', String(crf), '-preset', 'fast',
     '-movflags', '+faststart', out,
   ]);
   const result = probe(out);
@@ -283,7 +283,7 @@ function encode(input, out, { crf = 23, fadeOut } = {}) {
   if (fadeOut) filters.unshift(`fade=t=out:st=${(meta.duration - fadeOut).toFixed(2)}:d=${fadeOut}`);
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
   run('ffmpeg', ['-y', '-i', input, '-vf', filters.join(','),
-    '-c:v', 'libx264', '-crf', String(crf), '-preset', 'slow',
+    '-c:v', 'libx264', '-crf', String(crf), '-preset', 'fast',
     '-movflags', '+faststart', out]);
   return probe(out);
 }

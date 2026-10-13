@@ -135,7 +135,7 @@ layer; it belongs inside the product video, wherever it goes.
    dissolve there ghosts each label into its neighbour; use a 0.3–0.5 s
    crossfade only when the scenes look nothing alike, and hard cuts when they
    are visually cleaner. For a single clip use `encode(input, out, {fadeOut:
-   0.5})`, or `libx264` CRF 23 `-movflags +faststart` by hand.
+   0.5})`, or `libx264` CRF 23 `-preset fast -movflags +faststart` by hand.
    Re-extract frames at every computed join and inspect
    them before delivery. Use descriptive kebab-case names
    (`product-1-feature.mp4`), deliver to a durable directory (rules below), and

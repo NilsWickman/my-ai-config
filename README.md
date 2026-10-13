@@ -7,32 +7,27 @@ canonical skill library, symlinked into every tool.
 This is a public mirror of a private setup. Machine-, employer- and
 customer-specific parts are not included, see [Scope](#scope).
 
-## The idea: one source, many tools
+## The idea: one skill library, many tools
 
-Every agent tool wants its own config directory. Keeping three copies of the
-same instructions in sync by hand fails immediately, so everything points at
-one place instead:
+Every agent tool wants its own config directory. Keeping copies in sync by hand
+fails immediately, so every tool's skill directory points at one place instead:
 
 ```
-~/.agents/AGENTS.md          ← the only real instruction file
 ~/.agents/skills/            ← the only real skill library
-     ├─ ~/.claude/CLAUDE.md   → symlink to AGENTS.md
      ├─ ~/.claude/skills      → symlink to skills/
-     ├─ ~/.codex/AGENTS.md    → symlink to AGENTS.md
      ├─ ~/.codex/skills       → symlink to skills/
-     ├─ ~/.pi/agent/AGENTS.md → symlink to AGENTS.md
      └─ ~/.pi/agent/skills    → symlink to skills/
 ```
 
-`CLAUDE.md` is an alias, not a file you edit. Editing a tool directory means
-editing a symlink, so all changes go to `~/.agents/` or, better, to the chezmoi
-source.
+There are deliberately no global agent instructions (`AGENTS.md`/`CLAUDE.md`):
+the tools run native and each project's own instruction file is enough. Editing
+a tool's skill directory means editing a symlink, so all changes go to
+`~/.agents/` or, better, to the chezmoi source.
 
 ## Layout
 
 | Source (repo) | Target (home) | What |
 |---|---|---|
-| `dot_agents/AGENTS.md` | `~/.agents/AGENTS.md` | Universal agent instructions |
 | `dot_agents/skills/` | `~/.agents/skills/` | Canonical skills (Agent Skills format) |
 | `dot_claude/` | `~/.claude/` | Status line script + symlinks |
 | `dot_codex/` | `~/.codex/` | Symlinks |
